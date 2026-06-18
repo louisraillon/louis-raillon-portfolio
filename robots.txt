@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://template-fawn-tau.vercel.app/sitemap.xml
+Sitemap: https://www.lmraillondev.com/sitemap.xml
