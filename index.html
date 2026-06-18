@@ -383,6 +383,7 @@ footer a:hover{color:var(--acc)}
     <a href="#about" data-i18n="nav.about">À propos</a>
     <a href="#work" data-i18n="nav.work">Projets</a>
     <a href="#cap" data-i18n="nav.skills">Savoir-faire</a>
+    <a href="#services" data-i18n="nav.services">Services</a>
     <a href="#contact" data-i18n="nav.contact">Contact</a>
     <div class="lang" role="group" aria-label="Language / Langue">
       <button type="button" data-lang="fr">FR</button>
@@ -451,7 +452,7 @@ footer a:hover{color:var(--acc)}
         <img class="ph" loading="lazy" decoding="async" width="1280" height="900" alt="AquaPro — site vitrine plomberie"
              src="img/proj-plomberie.webp" />
         <iframe class="live" data-src="https://plombier-liart.vercel.app/" title="Aperçu live — AquaPro" tabindex="-1" aria-hidden="true" scrolling="no" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        <span class="live-dot"><i></i>Live</span>
+        <span class="live-dot" aria-hidden="true"><i></i>Live</span>
         <span class="idx">01 / 05</span><span class="tag">Site vitrine</span></div>
       <div class="cap"><h3>AquaPro</h3><span class="yr">2025</span><span class="arrow">↗</span></div>
     </a>
@@ -460,7 +461,7 @@ footer a:hover{color:var(--acc)}
         <img class="ph" loading="lazy" decoding="async" width="1280" height="900" alt="FERRO — landing salle de sport"
              src="img/proj-gym.webp" />
         <iframe class="live" data-src="https://gym-ten-eosin.vercel.app/" title="Aperçu live — FERRO" tabindex="-1" aria-hidden="true" scrolling="no" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        <span class="live-dot"><i></i>Live</span>
+        <span class="live-dot" aria-hidden="true"><i></i>Live</span>
         <span class="idx">02 / 05</span><span class="tag">Landing · Fitness</span></div>
       <div class="cap"><h3>FERRO</h3><span class="yr">2026</span><span class="arrow">↗</span></div>
     </a>
@@ -476,7 +477,7 @@ footer a:hover{color:var(--acc)}
         <img class="ph" loading="lazy" decoding="async" width="1280" height="900" alt="Voltcraft — landing e-mobilité"
              src="img/proj-voltcraft.webp" />
         <iframe class="live" data-src="https://voltcraft-landing-page.vercel.app/" title="Aperçu live — Voltcraft" tabindex="-1" aria-hidden="true" scrolling="no" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        <span class="live-dot"><i></i>Live</span>
+        <span class="live-dot" aria-hidden="true"><i></i>Live</span>
         <span class="idx">04 / 05</span><span class="tag">Landing · E-mobility</span></div>
       <div class="cap"><h3>Voltcraft</h3><span class="yr">2024</span><span class="arrow">↗</span></div>
     </a>
@@ -570,7 +571,7 @@ footer a:hover{color:var(--acc)}
   /* ---------------- i18n: FR / EN / VI ---------------- */
   var I18N={
     fr:{
-      'nav.about':'À propos','nav.work':'Projets','nav.skills':'Savoir-faire','nav.contact':'Contact',
+      'nav.about':'À propos','nav.work':'Projets','nav.skills':'Savoir-faire','nav.services':'Services','nav.contact':'Contact',
       'loader.studio':'Studio créatif · 2026',
       'hero.l1':'Je conçois','hero.l2':'des <em>expériences</em>','hero.l3':'web vivantes.',
       'meta.role':'Développeur Fullstack','meta.avail':'Freelance · disponible','meta.loc':'↳ Hanoi, Vietnam',
@@ -599,7 +600,7 @@ footer a:hover{color:var(--acc)}
       'title':'Louis Raillon — Développeur Web · Portfolio'
     },
     en:{
-      'nav.about':'About','nav.work':'Work','nav.skills':'Expertise','nav.contact':'Contact',
+      'nav.about':'About','nav.work':'Work','nav.skills':'Expertise','nav.services':'Services','nav.contact':'Contact',
       'loader.studio':'Creative studio · 2026',
       'hero.l1':'I design','hero.l2':'living web','hero.l3':'<em>experiences</em>.',
       'meta.role':'Fullstack developer','meta.avail':'Freelance · available','meta.loc':'↳ Hanoi, Vietnam',
@@ -628,7 +629,7 @@ footer a:hover{color:var(--acc)}
       'title':'Louis Raillon — Web Developer · Portfolio'
     },
     vi:{
-      'nav.about':'Giới thiệu','nav.work':'Dự án','nav.skills':'Kỹ năng','nav.contact':'Liên hệ',
+      'nav.about':'Giới thiệu','nav.work':'Dự án','nav.skills':'Kỹ năng','nav.services':'Dịch vụ','nav.contact':'Liên hệ',
       'loader.studio':'Studio sáng tạo · 2026',
       'hero.l1':'Tôi thiết kế','hero.l2':'những <em>trải nghiệm</em>','hero.l3':'web sống động.',
       'meta.role':'Lập trình viên Fullstack','meta.avail':'Freelance · sẵn sàng','meta.loc':'↳ Hà Nội, Việt Nam',
@@ -763,7 +764,9 @@ footer a:hover{color:var(--acc)}
   var navEl=document.querySelector('nav'), navToggle=document.querySelector('.nav-toggle');
   if(navToggle){
     var setOpen=function(o){ navEl.classList.toggle('open',o); navToggle.setAttribute('aria-expanded',o);
-      navToggle.setAttribute('aria-label', o?'Fermer le menu':'Ouvrir le menu'); };
+      navToggle.setAttribute('aria-label', o?'Fermer le menu':'Ouvrir le menu');
+      document.body.style.overflow = o ? 'hidden' : '';
+      try{ if(window.lenis){ o ? (window.lenis.stop&&window.lenis.stop()) : (window.lenis.start&&window.lenis.start()); } }catch(e){} };
     navToggle.addEventListener('click',function(){ setOpen(!navEl.classList.contains('open')); });
     navEl.querySelectorAll('.links a').forEach(function(a){ a.addEventListener('click',function(){ setOpen(false); }); });
     addEventListener('keydown',function(e){ if(e.key==='Escape') setOpen(false); });
@@ -937,11 +940,17 @@ gltfLoader.load('models/globe.glb',
   (err)=>{ console.warn('GLB load failed, revealing anyway',err); ASSET.modelDone=true; ASSET.target=1; }
 );
 
-/* render loop */
-let tmx=0,tmy=0;
+/* render loop — paused when the hero is scrolled out of view (saves GPU/battery) */
+let tmx=0,tmy=0, heroVisible=true;
 addEventListener('mousemove',e=>{tmx=(e.clientX/innerWidth-.5);tmy=(e.clientY/innerHeight-.5);});
+if('IntersectionObserver' in window){
+  new IntersectionObserver(es=>{ heroVisible=es[0].isIntersecting; },{threshold:0})
+    .observe(document.querySelector('.hero'));
+}
 function render(){
+  requestAnimationFrame(render);
   const dt=clock.getDelta();
+  if(!heroVisible) return;            // hero off-screen → skip all 3D work
   if(mixer && !REDUCE) mixer.update(dt);
   if(!REDUCE){
     // independent continuous self-rotation + subtle mouse parallax around the base offset
@@ -951,7 +960,6 @@ function render(){
     globe.position.y += ((baseY - tmy*0.12) - globe.position.y)*0.05;
   } else { globe.position.x=baseX; globe.position.y=baseY; }
   renderer.render(scene,cam);
-  requestAnimationFrame(render);
 }
 render();
 
