@@ -162,7 +162,13 @@ nav.open .nav-toggle span:last-child{transform:translateY(-3.5px) rotate(-45deg)
 }
 
 /* focus-visible (keyboard accessibility) */
-a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:3px}
+
+/* skip-to-content link (keyboard / screen-reader users) */
+.skip-link{position:fixed;top:-120px;left:16px;z-index:9999;background:var(--acc);color:var(--ink);
+  padding:11px 20px;border-radius:8px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;transition:top .25s var(--ease)}
+.skip-link:focus{top:16px;outline:none}
 
 /* reduced motion: kill loops + reveal content statically */
 @media (prefers-reduced-motion:reduce){
@@ -353,6 +359,7 @@ footer a:hover{color:var(--acc)}
 </head>
 <body>
 
+<a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
 <div class="grain" aria-hidden="true"></div>
 <div class="vig" aria-hidden="true"></div>
 
@@ -393,6 +400,7 @@ footer a:hover{color:var(--acc)}
   </div>
 </nav>
 
+<main id="main">
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-glow"></div>
@@ -546,6 +554,7 @@ footer a:hover{color:var(--acc)}
     <a href="mailto:louisraillon1234@gmail.com" class="glass"><span class="dot"></span><span data-i18n="form.or">ou écrivez-moi directement</span></a>
   </div>
 </section>
+</main>
 
 <footer>
   <span data-i18n="footer.rights">© 2026 Louis Raillon — Tous droits réservés</span>
@@ -572,7 +581,7 @@ footer a:hover{color:var(--acc)}
   var I18N={
     fr:{
       'nav.about':'À propos','nav.work':'Projets','nav.skills':'Savoir-faire','nav.services':'Services','nav.contact':'Contact',
-      'loader.studio':'Studio créatif · 2026',
+      'skip':'Aller au contenu','loader.studio':'Studio créatif · 2026',
       'hero.l1':'Je conçois','hero.l2':'des <em>expériences</em>','hero.l3':'web vivantes.',
       'meta.role':'Développeur Fullstack','meta.avail':'Freelance · disponible','meta.loc':'↳ Hanoi, Vietnam',
       'hero.corner':'© 2026 — Portfolio v1<br/>Scroll pour explorer','scroll':'défiler',
@@ -601,7 +610,7 @@ footer a:hover{color:var(--acc)}
     },
     en:{
       'nav.about':'About','nav.work':'Work','nav.skills':'Expertise','nav.services':'Services','nav.contact':'Contact',
-      'loader.studio':'Creative studio · 2026',
+      'skip':'Skip to content','loader.studio':'Creative studio · 2026',
       'hero.l1':'I design','hero.l2':'living web','hero.l3':'<em>experiences</em>.',
       'meta.role':'Fullstack developer','meta.avail':'Freelance · available','meta.loc':'↳ Hanoi, Vietnam',
       'hero.corner':'© 2026 — Portfolio v1<br/>Scroll to explore','scroll':'scroll',
@@ -630,7 +639,7 @@ footer a:hover{color:var(--acc)}
     },
     vi:{
       'nav.about':'Giới thiệu','nav.work':'Dự án','nav.skills':'Kỹ năng','nav.services':'Dịch vụ','nav.contact':'Liên hệ',
-      'loader.studio':'Studio sáng tạo · 2026',
+      'skip':'Đến nội dung','loader.studio':'Studio sáng tạo · 2026',
       'hero.l1':'Tôi thiết kế','hero.l2':'những <em>trải nghiệm</em>','hero.l3':'web sống động.',
       'meta.role':'Lập trình viên Fullstack','meta.avail':'Freelance · sẵn sàng','meta.loc':'↳ Hà Nội, Việt Nam',
       'hero.corner':'© 2026 — Portfolio v1<br/>Cuộn để khám phá','scroll':'cuộn',
